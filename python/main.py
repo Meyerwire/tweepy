@@ -5,39 +5,20 @@ import functs
 #Variables
 auth_check = False
 Fail_counter = 0
+#tweepy client
+bearer_token = input('bearer: ')
+key = input('key: ')
+key_private = input('key secret: ')
+token = input('token: ')
+token_secret = input('token secret: ')
 
-#Auth Loop
-while auth_check == False:
-    key = input('key: ')
-    key_private = input('key secret: ')
-    token = input('token: ')
-    token_secret = input('token secret: ')
+cli = tweepy.Client(bearer_token, key, key_private,token,token_secret)
+
+cli.like(1468492192536829952)
+
+###################
 
 
-    # Authenticate to Twitter
-    auth = tweepy.OAuthHandler(key, key_private)
-    auth.set_access_token(token,token_secret)
-
-    api = tweepy.API(auth)
-
-    try:
-        api.verify_credentials()
-        print("Authentication OK")
-        auth_check = True
-    except:
-        print("Error during authentication")
-        Fail_counter += 1
-        if Fail_counter > 4:
-            break
-        
-
-if auth_check == True:
-    functs.helloTweep(api)
-
-if auth_check == True:
-    tweets = functs.GetTimeLine(api)
-    for tweet in tweets:
-        print(tweet.text)
 
 
 
