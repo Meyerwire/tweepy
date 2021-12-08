@@ -1,15 +1,10 @@
 #!/usr/bin/env python3
 import tweepy
-
-#Functions
-def helloTweep():
-    api.update_status("Hello Tweepy")
-    print("tweeted")
+import functs
 
 #Variables
 auth_check = False
 Fail_counter = 0
-
 
 #Auth Loop
 while auth_check == False:
@@ -17,7 +12,6 @@ while auth_check == False:
     key_private = input('key secret: ')
     token = input('token: ')
     token_secret = input('token secret: ')
-
 
 
     # Authenticate to Twitter
@@ -38,7 +32,12 @@ while auth_check == False:
         
 
 if auth_check == True:
-    helloTweep()
+    functs.helloTweep(api)
+
+if auth_check == True:
+    tweets = functs.GetTimeLine(api)
+    for tweet in tweets:
+        print(tweet.text)
 
 
 
