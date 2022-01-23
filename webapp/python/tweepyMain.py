@@ -1,26 +1,24 @@
 #!/usr/bin/env python3
 import tweepy
-auth_check = False
-while auth_check == False:
-    key = input('key: ')
-    key_private = input('key secret: ')
-    token = input('token: ')
-    token_secret = input('token secret: ')
+import json
+
+with open("./webapp/python/credentials.json","r") as Cred:
+    CredsRaw = Cred.read()
+myCreds = json.loads(CredsRaw)
+
+TweepyCli = tweepy.Client(myCreds["bearer_token"],myCreds["key"],myCreds["key_secret"],myCreds["token"],myCreds["token_secret"])
+
+def tweetText(txt):
+    TweepyCli.create_tweet(text=txt)
+
+def likeTweet(tweetId):
+    TweepyCli.like(tweetId)
+
+def unlikeTweet(tweetId):
+    TweepyCli.unlike(tweetId)
 
 
-    # Authenticate to Twitter
-    auth = tweepy.OAuthHandler(key, key_private)
-    auth.set_access_token(token,token_secret)
-
-    api = tweepy.API(auth)
-
-    try:
-        api.verify_credentials()
-        print("Authentication OK")
-        auth_check = True
-    except:
-        print("Error during authentication")
 
 
-api.update_status("Hello Tweepy")
+#TweepyCli.create_tweet(text=tweet)
 print("tweeted")
