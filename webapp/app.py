@@ -1,12 +1,15 @@
+from urllib import request
 from flask import Flask , render_template
 
 
 app = Flask(__name__)
-@app.route('/')
-def home():
+@app.route('/' , methods = ['GET','POST'])
+def index():
+    if request.method == 'POST':
+        #if request.form.get()
     return render_template('index.html')
 
-#@app.route('/')
+
 
 
 
