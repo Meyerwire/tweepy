@@ -2,7 +2,7 @@
 import tweepy
 import json
 
-with open("./webapp/python/credentials.json","r") as Cred:
+with open("credentials.json","r") as Cred:
     CredsRaw = Cred.read()
 myCreds = json.loads(CredsRaw)
 
@@ -21,4 +21,4 @@ def unlikeTweet(tweetId):
 
 
 #TweepyCli.create_tweet(text=tweet)
-print("tweeted")
+#print("tweeted")
